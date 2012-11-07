@@ -1,0 +1,12 @@
+{
+  "name": "base62-node",
+  "version": "0.0.0",
+  "author": "sasa+1 <sasaplus1@gmail.com>",
+  "description": "base62 encode/decode library",
+  "main": "./base62.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sasaplus1/base62.js.git"
+  }
+}
