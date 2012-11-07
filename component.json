@@ -1,0 +1,5 @@
+{
+  "name": "base62",
+  "version": "0.0.0",
+  "main": "./base62.js"
+}
