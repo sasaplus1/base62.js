@@ -121,6 +121,14 @@ suite('base62のテスト', function () {
       assert.strictEqual(base62.encode(-3521614606207), '-ZZZZZZZ');
     });
 
+    test('10.5を渡して"a"が返ること', function () {
+      assert.strictEqual(base62.encode(10.5), 'a');
+    });
+
+    test('-10.5を渡して"-a"が返ること', function () {
+      assert.strictEqual(base62.encode(-10.5), '-a');
+    });
+
     test('undefinedを渡して空文字が返ること', function () {
       assert.strictEqual(base62.encode(), '');
     });
