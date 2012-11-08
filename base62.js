@@ -23,6 +23,29 @@
      * @return {number} 10進数に変換された数値
      */
     function decode_(str) {
+      var decodedNum = 0,
+          column, len, isNegative;
+
+      if (typeof str !== 'string' || !/^-?[\da-zA-Z]+$/.test(str)) {
+        return NaN;
+      }
+
+      isNegative = (str[0] === '-');
+      if (isNegative) {
+        str = str.slice(1);
+      }
+
+      column = len = str.length;
+      for (; column--;) {
+        decodedNum +=
+          BASE62_TABLE.indexOf(str[column]) * Math.pow(62, len - column - 1);
+      }
+
+      if (isNegative) {
+        decodedNum *= -1;
+      }
+
+      return decodedNum;
     }
 
     /**
