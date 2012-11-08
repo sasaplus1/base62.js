@@ -61,6 +61,10 @@
         return '';
       }
 
+      if (num === 0) {
+        return '0';
+      }
+
       isNegative = (num < 0);
       if (isNegative) {
         num *= -1;
