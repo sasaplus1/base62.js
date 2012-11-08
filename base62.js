@@ -31,6 +31,29 @@
      * @return {string} 62進数に変換された文字列
      */
     function encode_(num) {
+      var encodedStr,
+          isNegative;
+
+      if (typeof num !== 'number' || !isFinite(num)) {
+        return '';
+      }
+
+      isNegative = (num < 0);
+      if (isNegative) {
+        num *= -1;
+      }
+
+      encodedStr = '';
+      while (num > 0) {
+        encodedStr = BASE62_TABLE.charAt(num % 62) + encodedStr;
+        num = Math.floor(num / 62);
+      }
+
+      if (isNegative) {
+        encodedStr = '-' + encodedStr;
+      }
+
+      return encodedStr;
     }
 
     return {
