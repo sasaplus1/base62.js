@@ -11,7 +11,7 @@
   },
   "scripts": {
     "pretest": "npm install",
-    "test": "./node_modules/.bin/mocha"
+    "test": "NODE_PATH=./ ./node_modules/.bin/mocha"
   },
   "devDependencies": {
     "chai": "~1.3",
