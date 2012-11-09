@@ -1,5 +1,12 @@
-var assert = require('assert'),
-    base62 = require('base62');
+var assert, base62;
+
+if (typeof window === 'undefined') {
+  assert = require('chai').assert;
+  base62 = require('base62');
+} else {
+  assert = chai.assert;
+  base62 = window.Base62;
+}
 
 suite('base62のテスト', function () {
 
