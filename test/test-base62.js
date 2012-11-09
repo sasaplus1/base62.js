@@ -2,7 +2,7 @@ var assert, base62;
 
 if (typeof window === 'undefined') {
   assert = require('chai').assert;
-  base62 = require('base62');
+  base62 = require('../base62');
 } else {
   assert = chai.assert;
   base62 = window.Base62;

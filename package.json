@@ -10,8 +10,7 @@
     "url": "https://github.com/sasaplus1/base62.js.git"
   },
   "scripts": {
-    "pretest": "npm install",
-    "test": "NODE_PATH=./ ./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha"
   },
   "devDependencies": {
     "chai": "~1.3",
