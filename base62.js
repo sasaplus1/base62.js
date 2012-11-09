@@ -1,8 +1,5 @@
 /**
- * @license base62.js
- * http://github.com/sasaplus1/base62.js
- *
- * Copyright(c) 2012 sasa+1
+ * @license base62.js Copyright(c) 2012 sasa+1
  * Released under the MIT license
  * http://github.com/sasaplus1/base62.js/blob/master/LICENSE
  */
