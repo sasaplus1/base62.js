@@ -1,5 +1,4 @@
-npm-debug.log
 .DS_Store
 .*.swp
+.git*
 components/
-node_modules/
