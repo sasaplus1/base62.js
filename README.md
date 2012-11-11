@@ -1,4 +1,4 @@
-# base62.js
+# base62.js [![Build Status](https://travis-ci.org/sasaplus1/base62.js.png)](https://travis-ci.org/sasaplus1/base62.js)
 
 base62 encode/decode library
 
