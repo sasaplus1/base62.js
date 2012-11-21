@@ -63,9 +63,7 @@
       }
 
       isNegative = (num < 0);
-      if (isNegative) {
-        num *= -1;
-      }
+      num = Math.abs(num);
 
       encodedStr = '';
       while (num > 0) {
