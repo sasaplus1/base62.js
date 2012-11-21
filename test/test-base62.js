@@ -60,6 +60,10 @@ suite('base62のテスト', function () {
       assert.strictEqual(base62.decode('-ZZZZZZZ'), -3521614606207);
     });
 
+    test('"-"を渡してNaNが返ること', function () {
+      assert.strictEqual(isNaN(base62.decode('-')), true);
+    });
+
     test('undefinedを渡してNaNが返ること', function () {
       assert.strictEqual(isNaN(base62.decode()), true);
     });
