@@ -7,12 +7,23 @@
 
   var Base62 = (function(){
 
+    var TABLES_ = {
+      '09azAZ': '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '09AZaz': '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    }, tableKey_ = '09azAZ';
+
     /**
-     * @const
-     * @type {string}
+     * 変換に使用するテーブルを切り替えます。
+     * @param {string} tableKey テーブルのキー
+     * @throws {Error} 存在しないキーが指定された場合
      */
-    var BASE62_TABLE =
-          '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    function changeTable_(tableKey) {
+      if (typeof tableKey !== 'string' || TABLES_[tableKey] === void 0) {
+        tableKey_ = '';
+        throw new Error('unknown table key');
+      }
+      tableKey_ = tableKey;
+    }
 
     /**
      * 62進数を10進数に変換します。
@@ -21,7 +32,7 @@
      */
     function decode_(str) {
       var decodedNum = 0,
-          column, len, isNegative;
+          column, len, isNegative, table;
 
       if (typeof str !== 'string' || !/^-?[\da-zA-Z]+$/.test(str)) {
         return NaN;
@@ -32,10 +43,11 @@
         str = str.slice(1);
       }
 
+      table = getTable_();
       column = len = str.length;
       for (; column--;) {
         decodedNum +=
-          BASE62_TABLE.indexOf(str[column]) * Math.pow(62, len - column - 1);
+          table.indexOf(str[column]) * Math.pow(62, len - column - 1);
       }
 
       if (isNegative) {
@@ -51,8 +63,7 @@
      * @return {string} 62進数に変換された文字列
      */
     function encode_(num) {
-      var encodedStr,
-          isNegative;
+      var encodedStr, isNegative, table;
 
       if (typeof num !== 'number' || !isFinite(num)) {
         return '';
@@ -65,9 +76,10 @@
       isNegative = (num < 0);
       num = Math.abs(num);
 
+      table = getTable_();
       encodedStr = '';
       while (num > 0) {
-        encodedStr = BASE62_TABLE.charAt(num % 62) + encodedStr;
+        encodedStr = table.charAt(num % 62) + encodedStr;
         num = Math.floor(num / 62);
       }
 
@@ -78,7 +90,16 @@
       return encodedStr;
     }
 
+    /**
+     * 現在設定されている変換テーブルを返します。
+     * @return {string} 変換テーブル
+     */
+    function getTable_() {
+      return TABLES_[tableKey_];
+    }
+
     return {
+      changeTable: changeTable_,
       decode: decode_,
       encode: encode_
     };
