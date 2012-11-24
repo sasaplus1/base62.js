@@ -1,27 +1,28 @@
-/**
- * @license base62.js Copyright(c) 2012 sasa+1
- * Released under the MIT license
- * http://github.com/sasaplus1/base62.js/blob/master/LICENSE
- */
-;(function(){
+// base62.js Copyright(c) 2012 sasa+1
+// Released under the MIT license
+// http://github.com/sasaplus1/base62.js/blob/master/LICENSE
 
-  var Base62 = (function(){
+;(function() {
 
-    /**
-     * @const
-     * @type {string}
-     */
-    var BASE62_TABLE =
-          '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var Base62 = (function() {
 
-    /**
-     * 62進数を10進数に変換します。
-     * @param {string} str 62進数の文字列
-     * @return {number} 10進数に変換された数値
-     */
+    var TABLES_ = {
+      '09azAZ':
+          '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '09AZaz':
+          '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    }, tableKey_ = '09azAZ';
+
+    function changeTable_(tableKey) {
+      if (typeof tableKey !== 'string' || TABLES_[tableKey] === void 0) {
+        tableKey_ = '';
+        throw new Error('unknown table key');
+      }
+      tableKey_ = tableKey;
+    }
+
     function decode_(str) {
-      var decodedNum = 0,
-          column, len, isNegative;
+      var decodedNum, column, len, isNegative, table;
 
       if (typeof str !== 'string' || !/^-?[\da-zA-Z]+$/.test(str)) {
         return NaN;
@@ -32,10 +33,12 @@
         str = str.slice(1);
       }
 
+      table = getTable_();
+      decodedNum = 0;
       column = len = str.length;
       for (; column--;) {
         decodedNum +=
-          BASE62_TABLE.indexOf(str[column]) * Math.pow(62, len - column - 1);
+            table.indexOf(str[column]) * Math.pow(62, len - column - 1);
       }
 
       if (isNegative) {
@@ -45,14 +48,8 @@
       return decodedNum;
     }
 
-    /**
-     * 10進数を62進数に変換します。
-     * @param {number} num 10進数の数値
-     * @return {string} 62進数に変換された文字列
-     */
     function encode_(num) {
-      var encodedStr,
-          isNegative;
+      var encodedStr, isNegative, table;
 
       if (typeof num !== 'number' || !isFinite(num)) {
         return '';
@@ -63,13 +60,12 @@
       }
 
       isNegative = (num < 0);
-      if (isNegative) {
-        num *= -1;
-      }
+      num = Math.abs(num);
 
+      table = getTable_();
       encodedStr = '';
       while (num > 0) {
-        encodedStr = BASE62_TABLE.charAt(num % 62) + encodedStr;
+        encodedStr = table.charAt(num % 62) + encodedStr;
         num = Math.floor(num / 62);
       }
 
@@ -80,7 +76,12 @@
       return encodedStr;
     }
 
+    function getTable_() {
+      return TABLES_[tableKey_];
+    }
+
     return {
+      changeTable: changeTable_,
       decode: decode_,
       encode: encode_
     };
