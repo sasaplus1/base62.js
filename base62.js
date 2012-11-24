@@ -22,8 +22,7 @@
     }
 
     function decode_(str) {
-      var decodedNum = 0,
-          column, len, isNegative, table;
+      var decodedNum, column, len, isNegative, table;
 
       if (typeof str !== 'string' || !/^-?[\da-zA-Z]+$/.test(str)) {
         return NaN;
@@ -35,6 +34,7 @@
       }
 
       table = getTable_();
+      decodedNum = 0;
       column = len = str.length;
       for (; column--;) {
         decodedNum +=
