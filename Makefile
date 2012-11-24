@@ -19,8 +19,8 @@ all:
 	@echo '    install dependency modules with npm and bower.'
 	@echo
 	@echo '  test'
-	@echo '    run test for node.js with mocha.'
-	@echo '    for browser, please open ./test/test-base62.html.'
+	@echo '    run test with Mocha.'
+	@echo '    the browser, please open ./test/test-base62.html.'
 
 .PHONY: clean
 clean:
