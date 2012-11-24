@@ -68,10 +68,11 @@ base62.decode('ZZ');  // 3843
 * `tableKey` string - table key
 
 change a convert table.
-
 can set values below.
+
 * "09azAZ"
 * "09AZaz"
+
 default value is "09azAZ".
 
 throw error if unknown table key.
