@@ -8,222 +8,379 @@ if (typeof window === 'undefined') {
   base62 = window.Base62;
 }
 
-suite('base62のテスト', function () {
+suite('base62のテスト', function() {
 
-  suite('changeTable関数のテスト', function () {
+  suite('インスタンス生成のテスト', function() {
 
-    test('"09azAZ"テーブルに切り替えられること', function () {
-      assert.doesNotThrow(function () {
-        base62.changeTable('09azAZ');
-      });
+    test('引数なしで生成できること', function() {
+      assert.doesNotThrow(function() { new base62; }, base62,
+        'create new instance with no parameter does not throw');
     });
 
-    test('"09AZaz"テーブルに切り替えられること', function () {
-      assert.doesNotThrow(function () {
-        base62.changeTable('09AZaz');
-      });
+    test('"09azAZ"テーブルを指定して生成できること', function() {
+      assert.doesNotThrow(function() { new base62('09azAZ'); }, base62,
+        'create new instance with "09azAZ" does not throw');
     });
 
-    test('存在しないテーブルに切り替えると例外が投げられること', function () {
-      assert.throws(function () {
-        base62.changeTable('');
-      });
+    test('"09AZaz"テーブルを指定して生成できること', function() {
+      assert.doesNotThrow(function() { new base62('09AZaz'); }, base62,
+        'create new instance with "09AZaz" does not throw');
     });
 
-  });
+    test('存在しないテーブルを指定すると例外が発生すること', function() {
+      assert.throws(function() { new base62('AZaz09'); }, Error,
+        'create new instance with "AZaz09" throws Error');
 
-  suite('decode関数のテスト', function () {
-
-    test('空文字を渡してNaNが返ること', function () {
-      assert.isTrue(isNaN(base62.decode('')));
+      assert.throws(function() { new base62('azAZ09'); }, Error,
+        'create new instance with "azAZ09" throws Error');
     });
 
-    test('"-"を渡してNaNが返ること', function () {
-      assert.isTrue(isNaN(base62.decode('-')));
-    });
+    test('string以外の型を渡すと例外が発生すること', function() {
+      assert.throws(function() { new base62(1); }, TypeError,
+        'create new instance with 1 throws TypeError');
 
-    test('string以外の型を渡してNaNが返ること', function () {
-      assert.isTrue(isNaN(base62.decode(null)));
-      assert.isTrue(isNaN(base62.decode(void 0)));
-      assert.isTrue(isNaN(base62.decode(0)));
-      assert.isTrue(isNaN(base62.decode(1)));
-      assert.isTrue(isNaN(base62.decode(true)));
-      assert.isTrue(isNaN(base62.decode(false)));
-    });
+      assert.throws(function() { new base62(true); }, TypeError,
+        'create new instance with true throws TypeError');
 
-    suite('"09azAZ"テーブルの場合', function () {
+      // undefined
+      assert.throws(function() { new base62(void 0); }, TypeError,
+        'create new instance with undefined throws TypeError');
 
-      setup(function () {
-        base62.changeTable('09azAZ');
-      });
+      // null/object
+      assert.throws(function() { new base62(null); }, TypeError,
+        'create new instance with null throws TypeError');
 
-      test('"0"を渡して0が返ること', function () {
-        assert.strictEqual(base62.decode('0'), 0);
-      });
-
-      test('"Z"を渡して61が返ること', function () {
-        assert.strictEqual(base62.decode('Z'), 61);
-      });
-
-      test('"10"を渡して62が返ること', function () {
-        assert.strictEqual(base62.decode('10'), 62);
-      });
-
-      test('"ZZ"を渡して3843が返ること', function () {
-        assert.strictEqual(base62.decode('ZZ'), 3843);
-      });
-
-      test('"100"を渡して3844が返ること', function () {
-        assert.strictEqual(base62.decode('100'), 3844);
-      });
-
-      test('"-0"を渡して0が返ること', function () {
-        assert.strictEqual(base62.decode('-0'), 0);
-      });
-
-      test('"-Z"を渡して-61が返ること', function () {
-        assert.strictEqual(base62.decode('-Z'), -61);
-      });
-
-    });
-
-    suite('"09AZaz"テーブルの場合', function () {
-
-      setup(function () {
-        base62.changeTable('09AZaz');
-      });
-
-      test('"0"を渡して0が返ること', function () {
-        assert.strictEqual(base62.decode('0'), 0);
-      });
-
-      test('"z"を渡して61が返ること', function () {
-        assert.strictEqual(base62.decode('z'), 61);
-      });
-
-      test('"10"を渡して62が返ること', function () {
-        assert.strictEqual(base62.decode('10'), 62);
-      });
-
-      test('"zz"を渡して3843が返ること', function () {
-        assert.strictEqual(base62.decode('zz'), 3843);
-      });
-
-      test('"100"を渡して3844が返ること', function () {
-        assert.strictEqual(base62.decode('100'), 3844);
-      });
-
-      test('"-0"を渡して0が返ること', function () {
-        assert.strictEqual(base62.decode('-0'), 0);
-      });
-
-      test('"-z"を渡して-61が返ること', function () {
-        assert.strictEqual(base62.decode('-z'), -61);
-      });
-
+      // function
+      assert.throws(function() { new base62(function() {}); }, TypeError,
+        'create new instance with function throws TypeError');
     });
 
   });
 
-  suite('encode関数のテスト', function () {
+  suite('"09azAZ"テーブルでの関数のテスト', function () {
+    var b;
 
-    test('NaNを渡して空文字が返ること', function () {
-      assert.strictEqual(base62.encode(NaN), '');
+    suiteSetup(function() {
+      b = new base62('09azAZ');
     });
 
-    test('Infinityを渡して空文字が返ること', function () {
-      assert.strictEqual(base62.encode(Infinity), '');
+    suiteTeardown(function() {
+      b = null;
     });
 
-    test('-Infinityを渡して空文字が返ること', function () {
-      assert.strictEqual(base62.encode(-Infinity), '');
-    });
+    suite('decode関数のテスト', function() {
 
-    test('number以外の型を渡して空文字が返ること', function () {
-      assert.strictEqual(base62.encode(null), '');
-      assert.strictEqual(base62.encode(void 0), '');
-      assert.strictEqual(base62.encode(''), '');
-      assert.strictEqual(base62.encode('a'), '');
-      assert.strictEqual(base62.encode(true), '');
-      assert.strictEqual(base62.encode(false), '');
-    });
-
-    suite('"09azAZ"テーブルの場合', function () {
-
-      setup(function () {
-        base62.changeTable('09azAZ');
+      test('空文字を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.decode(''); }, Error,
+          'call decode() with empty string throws Error');
       });
 
-      test('0を渡して"0"が返ること', function () {
-        assert.strictEqual(base62.encode(0), '0');
+      test('"-"を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.decode('-'); }, Error,
+          'call decode() with "-" throws Error');
       });
 
-      test('61を渡して"Z"が返ること', function () {
-        assert.strictEqual(base62.encode(61), 'Z');
+      test('string以外の型を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.decode(1); }, TypeError,
+          'call decode() with 1 throws TypeError');
+
+        assert.throws(function() { b.decode(true); }, TypeError,
+          'call decode() with true throws TypeError');
+
+        // undefined
+        assert.throws(function() { b.decode(void 0); }, TypeError,
+          'call decode() with undefined throws TypeError');
+
+        // null/object
+        assert.throws(function() { b.decode(null); }, TypeError,
+          'call decode() with null throws TypeError');
+
+        // function
+        assert.throws(function() { b.decode(function() {}); }, TypeError,
+          'call decode() with function throws TypeError');
       });
 
-      test('62を渡して"10"が返ること', function () {
-        assert.strictEqual(base62.encode(62), '10');
+      test('"0"を0に変換できること', function() {
+        assert.strictEqual(b.decode('0'), 0, 'decode("0") should be return 0');
       });
 
-      test('3843を渡して"ZZ"が返ること', function () {
-        assert.strictEqual(base62.encode(3843), 'ZZ');
+      test('"Z"を61に変換できること', function() {
+        assert.strictEqual(b.decode('Z'), 61,
+          'decode("Z") should be return 61');
       });
 
-      test('-0を渡して"0"が返ること', function () {
-        assert.strictEqual(base62.encode(-0), '0');
+      test('"10"を62に変換できること', function() {
+        assert.strictEqual(b.decode('10'), 62,
+          'decode("10") should be return 62');
       });
 
-      test('-61を渡して"-Z"が返ること', function () {
-        assert.strictEqual(base62.encode(-61), '-Z');
+      test('"-0"を0に変換できること', function() {
+        assert.strictEqual(b.decode('-0'), 0,
+          'decode("-0") should be return 0');
       });
 
-      test('10.0, 10.1, 10.9を渡してすべて"a"が返ること', function () {
-        assert.strictEqual(base62.encode(10.0), 'a');
-        assert.strictEqual(base62.encode(10.1), 'a');
-        assert.strictEqual(base62.encode(10.9), 'a');
+      test('"-Z"を-61に変換できること', function() {
+        assert.strictEqual(b.decode('-Z'), -61,
+          'decode("-Z") should be return -61');
       });
 
-    });
-
-    suite('"09AZaz"テーブルの場合', function () {
-
-      setup(function () {
-        base62.changeTable('09AZaz');
+      test('"-10"を-62に変換できること', function() {
+        assert.strictEqual(b.decode('-10'), -62,
+          'decode("-10") should be return 62');
       });
 
-      test('0を渡して"0"が返ること', function () {
-        assert.strictEqual(base62.encode(0), '0');
+      test('"2lkCB1"を2147483647に変換できること', function() {
+        assert.strictEqual(b.decode('2lkCB1'), 2147483647,
+          'decode("2lkCB1") should be return 2147483647');
       });
 
-      test('61を渡して"z"が返ること', function () {
-        assert.strictEqual(base62.encode(61), 'z');
-      });
-
-      test('62を渡して"10"が返ること', function () {
-        assert.strictEqual(base62.encode(62), '10');
-      });
-
-      test('3843を渡して"zz"が返ること', function () {
-        assert.strictEqual(base62.encode(3843), 'zz');
-      });
-
-      test('-0を渡して"0"が返ること', function () {
-        assert.strictEqual(base62.encode(-0), '0');
-      });
-
-      test('-61を渡して"-z"が返ること', function () {
-        assert.strictEqual(base62.encode(-61), '-z');
-      });
-
-      test('10.0, 10.1, 10.9を渡してすべて"A"が返ること', function () {
-        assert.strictEqual(base62.encode(10.0), 'A');
-        assert.strictEqual(base62.encode(10.1), 'A');
-        assert.strictEqual(base62.encode(10.9), 'A');
+      test('"-2lkCB2"を-2147483648に変換できること', function() {
+        assert.strictEqual(b.decode('-2lkCB2'), -2147483648,
+          'decode("-2lkCB2") should be return -2147483648');
       });
 
     });
 
+    suite('encode関数のテスト', function() {
+
+      test('NaNを渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode(NaN); }, Error,
+          'call encode() with NaN throws Error');
+      });
+
+      test('Infinityを渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode(Infinity); }, Error,
+          'call encode() with Infinity throws Error');
+      });
+
+      test('-Infinityを渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode(-Infinity); }, Error,
+          'call encode() with -Infinity throws Error');
+      });
+
+      test('number以外の型を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode('a'); }, TypeError,
+          'call encode() with "a" throws TypeError');
+
+        assert.throws(function() { b.encode(true); }, TypeError,
+          'call encode() with true throws TypeError');
+
+        // undefined
+        assert.throws(function() { b.encode(void 0); }, TypeError,
+          'call encode() with undefined throws TypeError');
+
+        // null/object
+        assert.throws(function() { b.encode(null); }, TypeError,
+          'call encode() with null throws TypeError');
+
+        // function
+        assert.throws(function() { b.encode(function() {}); }, TypeError,
+          'call encode() with function throws TypeError');
+      });
+
+      test('0を"0"に変換できること', function() {
+        assert.strictEqual(b.encode(0), '0', 'encode(0) should be return "0"');
+      });
+
+      test('61を"Z"に変換できること', function() {
+        assert.strictEqual(b.encode(61), 'Z',
+          'encode(61) should be return "Z"');
+      });
+
+      test('62を"10"に変換できること', function() {
+        assert.strictEqual(b.encode(62), '10',
+          'encode(62) should be return "10"');
+      });
+
+      test('-0を"0"に変換できること', function() {
+        assert.strictEqual(b.encode(-0), '0',
+          'encode(-0) should be return "0"');
+      });
+
+      test('-61を"-Z"に変換できること', function() {
+        assert.strictEqual(b.encode(-61), '-Z',
+          'encode(-61) should be return "-Z"');
+      });
+
+      test('-62を"-10"に変換できること', function() {
+        assert.strictEqual(b.encode(-62), '-10',
+          'encode(-62) should be return "-10"');
+      });
+
+      test('2147483647を"2lkCB1"に変換できること', function() {
+        assert.strictEqual(b.encode(2147483647), '2lkCB1',
+          'encode(2147483647) should be return "2lkCB1"');
+      });
+
+      test('-2147483648を"-2lkCB2"に変換できること', function() {
+        assert.strictEqual(b.encode(-2147483648), '-2lkCB2',
+          'encode(-2147483648) should be return "-2lkCB2"');
+      });
+
+    });
+  });
+
+  suite('"09AZaz"テーブルでの関数のテスト', function () {
+    var b;
+
+    suiteSetup(function() {
+      b = new base62('09AZaz');
+    });
+
+    suiteTeardown(function() {
+      b = null;
+    });
+
+    suite('decode関数のテスト', function() {
+
+      test('空文字を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.decode(''); }, Error,
+          'call decode() with empty string throws Error');
+      });
+
+      test('"-"を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.decode('-'); }, Error,
+          'call decode() with "-" throws Error');
+      });
+
+      test('string以外の型を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.decode(1); }, TypeError,
+          'call decode() with 1 throws TypeError');
+
+        assert.throws(function() { b.decode(true); }, TypeError,
+          'call decode() with true throws TypeError');
+
+        // undefined
+        assert.throws(function() { b.decode(void 0); }, TypeError,
+          'call decode() with undefined throws TypeError');
+
+        // null/object
+        assert.throws(function() { b.decode(null); }, TypeError,
+          'call decode() with null throws TypeError');
+
+        // function
+        assert.throws(function() { b.decode(function() {}); }, TypeError,
+          'call decode() with function throws TypeError');
+      });
+
+      test('"0"を0に変換できること', function() {
+        assert.strictEqual(b.decode('0'), 0, 'decode("0") should be return 0');
+      });
+
+      test('"z"を61に変換できること', function() {
+        assert.strictEqual(b.decode('z'), 61,
+          'decode("z") should be return 61');
+      });
+
+      test('"10"を62に変換できること', function() {
+        assert.strictEqual(b.decode('10'), 62,
+          'decode("10") should be return 62');
+      });
+
+      test('"-0"を0に変換できること', function() {
+        assert.strictEqual(b.decode('-0'), 0,
+          'decode("-0") should be return 0');
+      });
+
+      test('"-z"を-61に変換できること', function() {
+        assert.strictEqual(b.decode('-z'), -61,
+          'decode("-z") should be return -61');
+      });
+
+      test('"-10"を-62に変換できること', function() {
+        assert.strictEqual(b.decode('-10'), -62,
+          'decode("-10") should be return 62');
+      });
+
+      test('"2LKcb1"を2147483647に変換できること', function() {
+        assert.strictEqual(b.decode('2LKcb1'), 2147483647,
+          'decode("2LKcb1") should be return 2147483647');
+      });
+
+      test('"-2LKcb2"を-2147483648に変換できること', function() {
+        assert.strictEqual(b.decode('-2LKcb2'), -2147483648,
+          'decode("-2LKcb2") should be return -2147483648');
+      });
+
+    });
+
+    suite('encode関数のテスト', function() {
+
+      test('NaNを渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode(NaN); }, Error,
+          'call encode() with NaN throws Error');
+      });
+
+      test('Infinityを渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode(Infinity); }, Error,
+          'call encode() with Infinity throws Error');
+      });
+
+      test('-Infinityを渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode(-Infinity); }, Error,
+          'call encode() with -Infinity throws Error');
+      });
+
+      test('number以外の型を渡すと例外が発生すること', function() {
+        assert.throws(function() { b.encode('a'); }, TypeError,
+          'call encode() with "a" throws TypeError');
+
+        assert.throws(function() { b.encode(true); }, TypeError,
+          'call encode() with true throws TypeError');
+
+        // undefined
+        assert.throws(function() { b.encode(void 0); }, TypeError,
+          'call encode() with undefined throws TypeError');
+
+        // null/object
+        assert.throws(function() { b.encode(null); }, TypeError,
+          'call encode() with null throws TypeError');
+
+        // function
+        assert.throws(function() { b.encode(function() {}); }, TypeError,
+          'call encode() with function throws TypeError');
+      });
+
+      test('0を"0"に変換できること', function() {
+        assert.strictEqual(b.encode(0), '0', 'encode(0) should be return "0"');
+      });
+
+      test('61を"z"に変換できること', function() {
+        assert.strictEqual(b.encode(61), 'z',
+          'encode(61) should be return "z"');
+      });
+
+      test('62を"10"に変換できること', function() {
+        assert.strictEqual(b.encode(62), '10',
+          'encode(62) should be return "10"');
+      });
+
+      test('-0を"0"に変換できること', function() {
+        assert.strictEqual(b.encode(-0), '0',
+          'encode(-0) should be return "0"');
+      });
+
+      test('-61を"-z"に変換できること', function() {
+        assert.strictEqual(b.encode(-61), '-z',
+          'encode(-61) should be return "-z"');
+      });
+
+      test('-62を"-10"に変換できること', function() {
+        assert.strictEqual(b.encode(-62), '-10',
+          'encode(-62) should be return "-10"');
+      });
+
+      test('2147483647を"2LKcb1"に変換できること', function() {
+        assert.strictEqual(b.encode(2147483647), '2LKcb1',
+          'encode(2147483647) should be return "2LKcb1"');
+      });
+
+      test('-2147483648を"-2LKcb2"に変換できること', function() {
+        assert.strictEqual(b.encode(-2147483648), '-2LKcb2',
+          'encode(-2147483648) should be return "-2LKcb2"');
+      });
+
+    });
   });
 
 });
