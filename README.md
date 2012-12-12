@@ -2,11 +2,7 @@
 
 base62 encode/decode library
 
-## License
-
-MIT License
-
-## Install
+## Installation
 
 ### from npm
 
@@ -21,31 +17,29 @@ MIT License
 ### for node.js
 
 ``` js
-var base62 = require('base62-node');
+var Base62 = require('base62-node');
 ```
 
 ### for the browser
 
 ``` js
-window.Base62;
+var Base62 = window.Base62;
 ```
 
-### common
+### basis usage
 
 ``` js
-// use default "09azAZ" table
-base62.encode(3843);  // 'ZZ'
-base62.decode('ZZ');  // 3843
+var base62 = new Base62;
 
-// change "09AZaz" table
-base62.changeTable('09AZaz');
-base62.encode(3843);  // 'zz'
-base62.decode('zz');  // 3843
+base62.encode(39134);  // "abc"
+base62.decode('abc');  // 39134
+```
 
-// change "09azAZ" table
-base62.changeTable('09azAZ');
-base62.encode(3843);  // 'ZZ'
-base62.decode('ZZ');  // 3843
+``` js
+var base62 = new Base62('09AZaz');
+
+base62.encode(39134);  // "ABC"
+base62.decode('ABC');  // 39134
 ```
 
 ## Test
@@ -63,52 +57,71 @@ base62.decode('ZZ');  // 3843
 
 ## Functions
 
-### changeTable(tableKey)
+### constructor(tableKeyStr)
 
-* `tableKey` string - table key
+* `tableKeyStr` string - base62 convert table key
 
-change a convert table.
+`tableKeyStr` can set values below.
 
-can set values below.
 * "09azAZ"
 * "09AZaz"
-default value is "09azAZ".
 
-throw error if unknown table key.
+if not parameter, value is "09azAZ".
+
+if parameter is not string types, throws TypeError.
+
+if unknown tableKey, throws Error.
 
 ``` js
-base62.changeTable('09AZaz');
-base62.changeTable('09azAZ');
+new Base62;            // use "09azAZ" table
+new Base62('09azAZ');  // use "09azAZ" table
+new Base62('09AZaz');  // use "09AZaz" table
 
-base62.changeTable('AZaz09');  // throws error!
+new Base62(12345678);  // throws TypeError
+new Base62('AZaz09');  // throws Error
 ```
 
 ### decode(str)
 
-* `str` string - base 62 string
+* `str` string - base62 string
 
-convert to decimal number from base 62 string.
-return NaN if cannot convert value.
+convert to decimal number from base62 string.
+
+if parameter is not string types, throws TypeError.
+
+if unsupported string format, throws Error.
+string format should be match for regexp of `^-?[\da-zA-Z]+$`.
 
 ``` js
+// "09azAZ" table
 base62.decode('Z');    //  61
 base62.decode('10');   //  62
 base62.decode('-10');  // -62
 
-base62.decode(10);     // NaN
+base62.decode(12345);  // throws TypeError
+base62.decode('!@=');  // throws Error
 ```
 
 ### encode(num)
 
 * `num` number - number value
 
-convert to base 62 string from decimal number.
-return empty string if cannot convert value.
+convert to base62 string from decimal number.
+
+if parameter is not number types, throws TypeError.
+
+if not a finite number(NaN, Infinity, -Infinity), throws Error.
 
 ``` js
+// "09azAZ" table
 base62.encode(61);    // "Z"
 base62.encode(62);    // "10"
 base62.encode(-62);   // "-10"
 
-base62.encode('10');  // ""
+base62.encode('1');  // throws TypeError
+base62.encode(NaN);  // throws Error
 ```
+
+## License
+
+MIT License. Please see LICENSE file.

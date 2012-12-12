@@ -2,6 +2,9 @@
 
 .DEFAULT_GOAL := all
 
+org_script=./lib/base62.js
+min_script=./base62.min.js
+
 .PHONY: all
 all:
 	@echo 'Target:'
@@ -14,6 +17,10 @@ all:
 	@echo
 	@echo '  lint'
 	@echo '    execute Closure Linter. (require gjslint command)'
+	@echo
+	@echo '  mini, minify'
+	@echo '    minify script with Closure Compiler Service.'
+	@echo '    (require curl command)'
 	@echo
 	@echo '  setup, setup-test-env'
 	@echo '    install dependency modules with npm and bower.'
@@ -34,7 +41,19 @@ setup-test-env:
 
 .PHONY: lint
 lint:
-	gjslint --strict --nojsdoc base62.js
+	gjslint --strict --nojsdoc $(org_script)
+
+.PHONY: mini minify
+mini: minify
+minify:
+	curl                                          \
+	  -s                                          \
+	  -d compilation_level=SIMPLE_OPTIMIZATIONS   \
+	  -d output_format=text                       \
+	  -d output_info=compiled_code                \
+	  --data-urlencode "js_code@$(org_script)"    \
+	  http://closure-compiler.appspot.com/compile \
+	  > $(min_script)
 
 .PHONY: test
 test:

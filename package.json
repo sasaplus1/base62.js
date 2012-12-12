@@ -1,9 +1,9 @@
 {
   "name": "base62-node",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "sasa+1 <sasaplus1@gmail.com>",
   "description": "base62 encode/decode library",
-  "main": "./base62.js",
+  "main": "./index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
