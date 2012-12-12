@@ -1,5 +1,5 @@
 {
   "name": "base62",
   "version": "0.2.0",
-  "main": "./lib/base62.js"
+  "main": "./base62.min.js"
 }
