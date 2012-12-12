@@ -41,7 +41,7 @@ setup-test-env:
 
 .PHONY: lint
 lint:
-	gjslint --strict --nojsdoc base62.js
+	gjslint --strict --nojsdoc $(org_script)
 
 .PHONY: mini minify
 mini: minify
