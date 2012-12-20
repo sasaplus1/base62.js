@@ -13,10 +13,7 @@ all:
 	@echo '    output this message.'
 	@echo
 	@echo '  clean'
-	@echo '    remove installed modules and generated files.'
-	@echo
-	@echo '  cov, coverage'
-	@echo '    generate code coverage file.'
+	@echo '    remove installed modules.'
 	@echo
 	@echo '  lint'
 	@echo '    execute Closure Linter. (require gjslint command)'
@@ -34,12 +31,7 @@ all:
 
 .PHONY: clean
 clean:
-	$(RM) -r ./node_modules ./components ./coverage.html
-
-.PHONY: cov coverage
-cov: coverage
-coverage:
-	npm run-script coverage
+	$(RM) -r ./node_modules ./components
 
 .PHONY: setup setup-test-env
 setup: setup-test-env
