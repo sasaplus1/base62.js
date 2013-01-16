@@ -11,6 +11,7 @@
     "url": "https://github.com/sasaplus1/base62.js.git"
   },
   "scripts": {
+    "lint": "gjslint --strict --nojsdoc -r ./lib -r ./test",
     "test": "./node_modules/.bin/mocha"
   },
   "devDependencies": {
