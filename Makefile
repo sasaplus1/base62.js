@@ -37,7 +37,7 @@ clean:
 setup: setup-test-env
 setup-test-env:
 	npm install
-	bower install 'chai#~1.3' 'jquery#~1.8' 'mocha#~1.6'
+	bower install 'chai#~1.4' 'jquery#~1.8' 'mocha#~1.8'
 
 .PHONY: lint
 lint:
