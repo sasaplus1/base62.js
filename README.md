@@ -42,19 +42,6 @@ base62.encode(39134);  // "ABC"
 base62.decode('ABC');  // 39134
 ```
 
-## Test
-
-### for node.js
-
-    $ npm install
-    $ npm test
-
-### for the browser
-
-    $ npm install -g bower
-    $ make setup
-    $ open ./test/test-base62.html
-
 ## Functions
 
 ### constructor(tableKeyStr)
@@ -122,6 +109,19 @@ base62.encode('1');  // throws TypeError
 base62.encode(NaN);  // throws Error
 ```
 
+## Test
+
+### for node.js
+
+    $ npm install
+    $ npm test
+
+### for the browser
+
+    $ npm install -g bower
+    $ make setup
+    $ open ./test/test-base62.html
+
 ## License
 
-MIT License. Please see LICENSE file.
+The MIT License. Please see LICENSE file.
