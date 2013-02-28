@@ -11,7 +11,9 @@
     "url": "https://github.com/sasaplus1/base62.js.git"
   },
   "scripts": {
+    "fix": "fixjsstyle --strict --nojsdoc -r ./lib -r ./test",
     "lint": "gjslint --strict --nojsdoc -r ./lib -r ./test",
+    "mini": "curl -s -d output_info=compiled_code --data-urlencode js_code@./lib/base62.js http://closure-compiler.appspot.com/compile > ./base62.min.js",
     "test": "./node_modules/.bin/mocha"
   },
   "devDependencies": {
