@@ -14,10 +14,13 @@
     "fix": "fixjsstyle --strict --nojsdoc -r ./lib -r ./test",
     "lint": "gjslint --strict --nojsdoc -r ./lib -r ./test",
     "mini": "curl -s -d output_info=compiled_code --data-urlencode js_code@./lib/base62.js http://closure-compiler.appspot.com/compile > ./base62.min.js",
-    "test": "./node_modules/.bin/mocha"
+    "pretest": "./node_modules/.bin/bower install",
+    "test": "./node_modules/.bin/mocha && ./node_modules/.bin/testem ci"
   },
   "devDependencies": {
+    "bower": "~0.8",
     "chai": "~1.5",
-    "mocha": "~1.8"
+    "mocha": "~1.8",
+    "testem": "~0.2"
   }
 }
