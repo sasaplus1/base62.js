@@ -111,16 +111,8 @@ base62.encode(NaN);  // throws Error
 
 ## Test
 
-### for node.js
-
     $ npm install
     $ npm test
-
-### for the browser
-
-    $ npm install -g bower
-    $ make setup
-    $ open ./test/test-base62.html
 
 ## License
 
