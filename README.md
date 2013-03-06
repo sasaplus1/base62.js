@@ -16,26 +16,26 @@ base62 encode/decode library
 
 ### for node.js
 
-``` js
+```js
 var Base62 = require('base62-node');
 ```
 
 ### for the browser
 
-``` js
-var Base62 = window.Base62;
+```html
+<script src="base62.min.js"></script>
 ```
 
-### basis usage
+### basic usage
 
-``` js
+```js
 var base62 = new Base62;
 
 base62.encode(39134);  // "abc"
 base62.decode('abc');  // 39134
 ```
 
-``` js
+```js
 var base62 = new Base62('09AZaz');
 
 base62.encode(39134);  // "ABC"
@@ -59,7 +59,7 @@ if parameter is not string types, throws TypeError.
 
 if unknown tableKey, throws Error.
 
-``` js
+```js
 new Base62;            // use "09azAZ" table
 new Base62('09azAZ');  // use "09azAZ" table
 new Base62('09AZaz');  // use "09AZaz" table
@@ -79,7 +79,7 @@ if parameter is not string types, throws TypeError.
 if unsupported string format, throws Error.
 string format should be match for regexp of `^-?[\da-zA-Z]+$`.
 
-``` js
+```js
 // "09azAZ" table
 base62.decode('Z');    //  61
 base62.decode('10');   //  62
@@ -99,7 +99,7 @@ if parameter is not number types, throws TypeError.
 
 if not a finite number(NaN, Infinity, -Infinity), throws Error.
 
-``` js
+```js
 // "09azAZ" table
 base62.encode(61);    // "Z"
 base62.encode(62);    // "10"
