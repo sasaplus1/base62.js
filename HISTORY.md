@@ -1,3 +1,7 @@
+# 0.3.1 / 2013-03-29
+
+  - added support for node.js 0.10
+
 # 0.3.0 / 2012-12-12
 
   - broken changes
