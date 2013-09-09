@@ -11,11 +11,13 @@
     "url": "https://github.com/sasaplus1/base62.js.git"
   },
   "scripts": {
+    "bower": "bower install",
     "fix": "fixjsstyle --strict --nojsdoc -r ./lib -r ./test",
     "lint": "gjslint --strict --nojsdoc -r ./lib -r ./test",
     "mini": "uglifyjs ./lib/base62.js --comments -cm -d 'module=void 0' -r base62 -o ./base62.min.js",
-    "pretest": "./node_modules/.bin/bower install",
-    "test": "./node_modules/.bin/mocha && ./node_modules/.bin/testem ci"
+    "test": "NODE_ENV=test mocha",
+    "testem": "testem ci",
+    "travis": "testem ci --launch Firefox,PhantomJS"
   },
   "devDependencies": {
     "bower": "~1.2",
