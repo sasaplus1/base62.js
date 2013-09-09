@@ -11,10 +11,9 @@ if (typeof module !== 'undefined') {
 describe('index', function() {
 
   it('should export some functions', function() {
-    expect(base62).to.be.a(Function);
-    expect(base62).to.only.have.keys([
-      'decode', 'encode'
-    ]);
+    expect(base62.createConverter).to.be.a(Function);
+    expect(base62.decode).to.be.a(Function);
+    expect(base62.encode).to.be.a(Function);
   });
 
 });
