@@ -12,7 +12,7 @@ describe('base62', function() {
 
   describe('#decode()', function() {
 
-    it('should throw error if parameter is not a number', function() {
+    it('should throw error if parameter is not a integer', function() {
       function f(v) {
         return function() {
           base62.decode(v);
@@ -25,6 +25,7 @@ describe('base62', function() {
 
       expect(f('')).to.throwError(fn);
       expect(f('-')).to.throwError(fn);
+      expect(f('0.1')).to.throwError(fn);
     });
 
     it('should throw error if parameter type is not a string', function() {
@@ -45,7 +46,7 @@ describe('base62', function() {
       expect(f(function() {})).to.throwError(fn);
     });
 
-    it('should convert to number from base62 string', function() {
+    it('should convert to integer from base62 string', function() {
       expect(base62.decode('0')).to.be(0);
       expect(base62.decode('Z')).to.be(61);
       expect(base62.decode('10')).to.be(62);
@@ -60,7 +61,7 @@ describe('base62', function() {
 
   describe('#encode()', function() {
 
-    it('should throw error if parameter is not a finite number', function() {
+    it('should throw error if parameter is not a integer', function() {
       function f(v) {
         return function() {
           base62.encode(v);
@@ -71,6 +72,7 @@ describe('base62', function() {
         expect(e).to.be.a(Error);
       }
 
+      expect(f(0.1)).to.throwError(fn);
       expect(f(NaN)).to.throwError(fn);
       expect(f(Infinity)).to.throwError(fn);
       expect(f(-Infinity)).to.throwError(fn);
@@ -94,7 +96,7 @@ describe('base62', function() {
       expect(f(function() {})).to.throwError(fn);
     });
 
-    it('should convert to base62 string from number', function() {
+    it('should convert to base62 string from integer', function() {
       expect(base62.encode(0)).to.be('0');
       expect(base62.encode(61)).to.be('Z');
       expect(base62.encode(62)).to.be('10');
