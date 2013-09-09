@@ -54,7 +54,7 @@ describe('base62', function() {
       expect(base62.decode('-Z')).to.be(-61);
       expect(base62.decode('-10')).to.be(-62);
       expect(base62.decode('2lkCB1')).to.be(2147483647);
-      expect(base62.decode('-2lkCB2')).to.be(-2147483647);
+      expect(base62.decode('-2lkCB2')).to.be(-2147483648);
     });
 
   });
@@ -104,7 +104,7 @@ describe('base62', function() {
       expect(base62.encode(-61)).to.be('-Z');
       expect(base62.encode(-62)).to.be('-10');
       expect(base62.encode(2147483647)).to.be('2lkCB1');
-      expect(base62.encode(-2147483647)).to.be('-2lkCB2');
+      expect(base62.encode(-2147483648)).to.be('-2lkCB2');
     });
 
   });
