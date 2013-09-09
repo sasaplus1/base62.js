@@ -12,8 +12,8 @@
   },
   "scripts": {
     "bower": "bower install",
-    "fix": "fixjsstyle --strict --nojsdoc -r ./lib -r ./test",
-    "lint": "gjslint --strict --nojsdoc -r ./lib -r ./test",
+    "fix": "fixjsstyle --strict --nojsdoc -r ./lib -r ./test ./index.js",
+    "lint": "gjslint --strict --nojsdoc -r ./lib -r ./test ./index.js",
     "mini": "uglifyjs ./lib/base62.js --comments -cm -d 'module=void 0' -r base62 -o ./base62.min.js",
     "test": "NODE_ENV=test mocha",
     "testem": "testem ci",
