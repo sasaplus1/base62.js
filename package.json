@@ -13,7 +13,7 @@
   "scripts": {
     "fix": "fixjsstyle --strict --nojsdoc -r ./lib -r ./test",
     "lint": "gjslint --strict --nojsdoc -r ./lib -r ./test",
-    "mini": "curl -s -d output_info=compiled_code --data-urlencode js_code@./lib/base62.js http://closure-compiler.appspot.com/compile > ./base62.min.js",
+    "mini": "uglifyjs ./lib/base62.js --comments -cm -d 'module=void 0' -r base62 -o ./base62.min.js",
     "pretest": "./node_modules/.bin/bower install",
     "test": "./node_modules/.bin/mocha && ./node_modules/.bin/testem ci"
   },
@@ -21,6 +21,7 @@
     "bower": "~1.2",
     "chai": "~1.5",
     "mocha": "~1.8",
-    "testem": "~0.2"
+    "testem": "~0.2",
+    "uglify-js": "~2.4"
   }
 }
