@@ -8,7 +8,7 @@
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sasaplus1/base62.js.git"
+    "url": "git://github.com/sasaplus1/base62.js.git"
   },
   "scripts": {
     "bower": "bower install",
