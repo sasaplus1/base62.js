@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "bower": "~1.2",
-    "chai": "~1.5",
-    "mocha": "~1.8",
-    "testem": "~0.2",
+    "expect.js": "~0.2",
+    "mocha": "~1.12",
+    "testem": "~0.4",
     "uglify-js": "~2.4"
   }
 }
