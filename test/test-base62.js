@@ -158,7 +158,7 @@ describe('base62', function() {
 
     it('should has default table', function() {
       expect((new base62.Base62_).table_).to.be(
-        '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+          '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     });
 
     it('should set another table', function() {
