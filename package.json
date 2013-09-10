@@ -1,5 +1,5 @@
 {
-  "name": "base62-node",
+  "name": "base62.js",
   "version": "0.3.1",
   "author": "sasa+1 <sasaplus1@gmail.com>",
   "description": "base62 encode/decode library",
