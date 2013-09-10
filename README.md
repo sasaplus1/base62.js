@@ -1,118 +1,98 @@
-# base62.js [![Build Status](https://travis-ci.org/sasaplus1/base62.js.png)](https://travis-ci.org/sasaplus1/base62.js)
+# base62.js
+
+[![Build Status](https://travis-ci.org/sasaplus1/base62.js.png)](https://travis-ci.org/sasaplus1/base62.js)
+[![Dependency Status](https://gemnasium.com/sasaplus1/base62.js.png)](https://gemnasium.com/sasaplus1/base62.js)
 
 base62 encode/decode library
 
 ## Installation
 
-### from npm
+### npm
 
-    $ npm install base62-node
+```sh
+$ npm install base62.js
+```
 
-### from bower
+### bower
 
-    $ bower install base62
+```sh
+$ bower install base62
+```
 
 ## Usage
 
-### for node.js
+### node.js
 
 ```js
-var Base62 = require('base62-node');
+var base62 = require('base62.js');
 ```
 
-### for the browser
+### browser
 
 ```html
 <script src="base62.min.js"></script>
 ```
 
-### basic usage
-
 ```js
-var base62 = new Base62;
-
 base62.encode(39134);  // "abc"
 base62.decode('abc');  // 39134
 ```
 
 ```js
-var base62 = new Base62('09AZaz');
+var b62 = base62.createConverter(
+    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
 
-base62.encode(39134);  // "ABC"
-base62.decode('ABC');  // 39134
+b62.encode(39134);  // "ABC"
+b62.decode('ABC');  // 39134
 ```
 
 ## Functions
 
-### constructor(tableKeyStr)
+### createConverter([table])
 
-* `tableKeyStr` string - base62 convert table key
+* `table` string - base62 table string
+* `return` Base62 - Base62 instance
 
-`tableKeyStr` can set values below.
+return Base62 instance.
 
-* "09azAZ"
-* "09AZaz"
+use default table if table is not set.
+default table is `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`.
 
-if not parameter, value is "09azAZ".
+throw TypeError if table is not a string.
 
-if parameter is not string types, throws TypeError.
+throw Error if table is not 62 length.
 
-if unknown tableKey, throws Error.
-
-```js
-new Base62;            // use "09azAZ" table
-new Base62('09azAZ');  // use "09azAZ" table
-new Base62('09AZaz');  // use "09AZaz" table
-
-new Base62(12345678);  // throws TypeError
-new Base62('AZaz09');  // throws Error
-```
-
-### decode(str)
+### Base62#decode(str)
 
 * `str` string - base62 string
+* `return` number - decoded number
 
-convert to decimal number from base62 string.
+convert from base62 string to integer.
 
-if parameter is not string types, throws TypeError.
+throw TypeError if str is not a string.
 
-if unsupported string format, throws Error.
-string format should be match for regexp of `^-?[\da-zA-Z]+$`.
+throw Error if str is unsupported format.
+str should match to `/^-?[\da-zA-Z]+$/`.
 
-```js
-// "09azAZ" table
-base62.decode('Z');    //  61
-base62.decode('10');   //  62
-base62.decode('-10');  // -62
+### Base62#encode(num)
 
-base62.decode(12345);  // throws TypeError
-base62.decode('!@=');  // throws Error
-```
+* `num` number - integer
+* `return` string - encoded string
 
-### encode(num)
+convert from integer to base62 string.
 
-* `num` number - number value
+throw TypeError if num is not a number.
 
-convert to base62 string from decimal number.
-
-if parameter is not number types, throws TypeError.
-
-if not a finite number(NaN, Infinity, -Infinity), throws Error.
-
-```js
-// "09azAZ" table
-base62.encode(61);    // "Z"
-base62.encode(62);    // "10"
-base62.encode(-62);   // "-10"
-
-base62.encode('1');  // throws TypeError
-base62.encode(NaN);  // throws Error
-```
+throw Error if num is not an integer.
+num is not a finite number (ex. NaN, Infinity or -Infinity).
+or num is floating-point number.
 
 ## Test
 
-    $ npm install
-    $ npm test
+```sh
+$ npm install
+$ npm test
+```
 
 ## License
 
