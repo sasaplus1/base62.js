@@ -1,4 +1,4 @@
-# 0.3.2 / 2013-09-10
+# 0.4.0 / 2013-09-10
 
   - renamed from base62-node to base62.js
   - updated modules
