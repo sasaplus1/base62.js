@@ -1,3 +1,9 @@
+# 0.3.2 / 2013-09-10
+
+  - renamed from base62-node to base62.js
+  - updated modules
+  - changed from chai to expect.js
+
 # 0.3.1 / 2013-03-29
 
   - added support for node.js 0.10
