@@ -55,7 +55,7 @@ b62.decode('ABC');  // 39134
 
 return Base62 instance.
 
-use default table if table is not set.
+use default table if parameter is empty.
 default table is `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`.
 
 throw TypeError if table is not a string.
