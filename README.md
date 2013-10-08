@@ -89,9 +89,19 @@ or num is floating-point number.
 
 ## Test
 
+### test for node.js
+
 ```sh
 $ npm install
 $ npm test
+```
+
+### test for browser
+
+```sh
+$ npm install
+$ npm run-script bower
+$ npm run-script testem
 ```
 
 ## License
