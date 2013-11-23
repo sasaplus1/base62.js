@@ -1,3 +1,7 @@
+# 0.4.1 / 2013-11-22
+
+  - fixed error messages
+
 # 0.4.0 / 2013-09-10
 
   - renamed from base62-node to base62.js
