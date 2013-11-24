@@ -55,7 +55,7 @@ b62.decode('ABC');  // 39134
 
 return Base62 instance.
 
-use default table if table is not set.
+use default table if parameter is empty.
 default table is `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`.
 
 throw TypeError if table is not a string.
@@ -89,9 +89,19 @@ or num is floating-point number.
 
 ## Test
 
+### test for node.js
+
 ```sh
 $ npm install
 $ npm test
+```
+
+### test for browser
+
+```sh
+$ npm install
+$ npm run-script bower
+$ npm run-script testem
 ```
 
 ## License
