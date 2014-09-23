@@ -1,7 +1,7 @@
 # base62.js
 
-[![Build Status](https://travis-ci.org/sasaplus1/base62.js.png)](https://travis-ci.org/sasaplus1/base62.js)
-[![Dependency Status](https://gemnasium.com/sasaplus1/base62.js.png)](https://gemnasium.com/sasaplus1/base62.js)
+[![Build Status](https://travis-ci.org/sasaplus1/base62.js.svg)](https://travis-ci.org/sasaplus1/base62.js)
+[![Dependency Status](https://gemnasium.com/sasaplus1/base62.js.svg)](https://gemnasium.com/sasaplus1/base62.js)
 
 base62 encode/decode library
 
