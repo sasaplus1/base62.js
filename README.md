@@ -33,6 +33,8 @@ var base62 = require('base62.js');
 <script src="base62.min.js"></script>
 ```
 
+### Basics
+
 ```js
 base62.encode(39134);  // "abc"
 base62.decode('abc');  // 39134
@@ -100,10 +102,10 @@ $ npm test
 
 ```sh
 $ npm install
-$ npm run-script bower
-$ npm run-script testem
+$ npm run bower
+$ npm run testem
 ```
 
 ## License
 
-The MIT License. Please see LICENSE file.
+The MIT license. Please see LICENSE file.
