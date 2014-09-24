@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/sasaplus1/base62.js.svg)](https://travis-ci.org/sasaplus1/base62.js)
 [![Dependency Status](https://gemnasium.com/sasaplus1/base62.js.svg)](https://gemnasium.com/sasaplus1/base62.js)
+[![NPM version](https://badge.fury.io/js/base62.js.svg)](http://badge.fury.io/js/base62.js)
+[![Bower version](https://badge.fury.io/bo/base62.svg)](http://badge.fury.io/bo/base62)
 
 base62 encode/decode library
 
