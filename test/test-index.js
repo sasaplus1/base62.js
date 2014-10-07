@@ -1,12 +1,5 @@
-var expect, base62;
-
-if (typeof module !== 'undefined') {
-  expect = require('expect.js');
-  base62 = require('../');
-} else {
-  expect = this.expect;
-  base62 = this.base62;
-}
+var expect = this.expect || require('expect.js'),
+    base62 = this.base62 || require('../');
 
 describe('index', function() {
 
