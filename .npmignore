@@ -1,5 +1,6 @@
 .closurelinter
 .travis.yml
+Makefile
 base62.min.js
 bower.json
 testem.json
