@@ -1,3 +1,9 @@
+# 0.5.0 / 2014-10-08
+
+  - refactored
+  - updated modules
+  - changed to publicize Base62 constructor
+
 # 0.4.1 / 2013-11-22
 
   - fixed error messages
