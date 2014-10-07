@@ -14,7 +14,7 @@
     "bower": "bower install",
     "fix": "fixjsstyle --flagfile .closurelinter -r ./lib -r ./test ./index.js",
     "lint": "gjslint --flagfile .closurelinter -r ./lib -r ./test ./index.js",
-    "mini": "uglifyjs ./lib/base62.js --comments -cm -d 'module=void 0' -r base62 -o ./base62.min.js",
+    "minify": "make clean all",
     "test": "NODE_ENV=test mocha",
     "testem": "testem ci",
     "travis": "testem ci --launch Firefox,PhantomJS"
