@@ -42,9 +42,14 @@ base62.encode(39134);  // "abc"
 base62.decode('abc');  // 39134
 ```
 
+if you want use another table:
+
 ```js
 var b62 = base62.createConverter(
     '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+// or
+// var b62 = new base62.Base62(
+//     '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
 
 b62.encode(39134);  // "ABC"
 b62.decode('ABC');  // 39134
@@ -54,53 +59,60 @@ b62.decode('ABC');  // 39134
 
 ### createConverter([table])
 
-* `table` string - base62 table string
-* `return` Base62 - Base62 instance
+* `table`
+  * `String` - base62 table string
+* `return`
+  * `Base62` - Base62 instance
 
 return Base62 instance.
 
-use default table if parameter is empty.
-default table is `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`.
+### Base62([table])
 
-throw TypeError if table is not a string.
+* `table`
+  * `String` - base62 table string
 
-throw Error if table is not 62 length.
+constructor of Base62 class.
+
+use default base62 table if parameter is empty. default table is `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`.
+
+throw TypeError if table is not a String.
+
+throw RangeError if table length is not equal 62.
 
 ### Base62#decode(str)
 
-* `str` string - base62 string
-* `return` number - decoded number
+* `str`
+  * `String` - base62 string
+* `return`
+  * `Number` - decoded number
 
-convert from base62 string to integer.
+decode to integer from base62 string.
 
-throw TypeError if str is not a string.
+throw TypeError if str is not a String.
 
-throw Error if str is unsupported format.
-str should match to `/^-?[\da-zA-Z]+$/`.
+throw Error if str is unsupported format. str must match to `/^-?[\dA-Za-z]+$/`.
 
 ### Base62#encode(num)
 
-* `num` number - integer
-* `return` string - encoded string
+* `num`
+  * `Number` - integer
+* `return`
+  * `String` - encoded string
 
-convert from integer to base62 string.
+encode to base62 string from integer.
 
-throw TypeError if num is not a number.
-
-throw Error if num is not an integer.
-num is not a finite number (ex. NaN, Infinity or -Infinity).
-or num is floating-point number.
+throw TypeError if num is not an integer. (ex: `NaN`, `Infinity`, `-Infinity` and floating-point number)
 
 ## Test
 
-### test for node.js
+### node.js
 
 ```sh
 $ npm install
 $ npm test
 ```
 
-### test for browser
+### browser
 
 ```sh
 $ npm install
