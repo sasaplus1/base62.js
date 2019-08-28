@@ -12,6 +12,7 @@
   },
   "scripts": {
     "bower": "bower install",
+    "fixpack": "npx fixpack",
     "fix": "fixjsstyle --flagfile .closurelinter -r ./lib -r ./test ./index.js",
     "lint": "gjslint --flagfile .closurelinter -r ./lib -r ./test ./index.js",
     "minify": "make clean all",
