@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const basicTable = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 /**
  * create index map
@@ -43,7 +41,6 @@ function decode(str, baseTable = basicTable) {
     }, 0);
     return isNegative ? -result : result;
 }
-exports.decode = decode;
 /**
  * encode to base62 string from number
  *
@@ -70,5 +67,5 @@ function encode(num, baseTable = basicTable) {
     }
     return num < 0 ? `-${result.join('')}` : result.join('');
 }
-exports.encode = encode;
-//# sourceMappingURL=index.js.map
+
+export { decode, encode };
