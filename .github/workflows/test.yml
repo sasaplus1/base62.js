@@ -1,0 +1,75 @@
+name: test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  mocha:
+    name: mocha
+    strategy:
+      matrix:
+        node:
+          - 8
+          - 10
+          - 12
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn run lint
+      - run: yarn run test
+      - run: yarn run check-types
+  karma-windows:
+    name: karma on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn add -D karma-edge-launcher karma-ie-launcher
+      # NOTE: karma-edge-launcher cannot execute Edge
+      # see: https://github.com/sasaplus1/holidays-jp.js/runs/200661928
+      # - run: yarn karma start --single-run --browsers Edge,IE
+      - run: yarn karma start --single-run --browsers IE
+  # NOTE: karma-safari-launcher can execute Safari, but not capture
+  # see: https://github.com/sasaplus1/holidays-jp.js/runs/200661925
+  # karma-macos:
+  #   name: karma on macOS
+  #   runs-on: macOS-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #       with:
+  #         fetch-depth: 1
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 10
+  #     - run: npm install -g yarn
+  #     - run: yarn install --frozen-lockfile
+  #     - run: yarn add -D karma-safari-launcher
+  #     - run: yarn karma start --single-run --browsers Safari
+  karma-ubuntu:
+    name: karma on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn add -D karma-chrome-launcher karma-firefox-launcher
+      - run: yarn karma start --single-run --browsers ChromeHeadlessNoSandbox,FirefoxHeadless
