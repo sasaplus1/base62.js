@@ -28,8 +28,13 @@
     "url": "https://github.com/sasaplus1/base62.js.git"
   },
   "scripts": {
+    "build": "run-p -l build:*",
+    "build:cjs": "tsc",
+    "check-types": "tsc --noEmit",
     "fix": "eslint --cache --fix --ext .js,.ts .",
     "fixpack": "npx fixpack",
-    "lint": "eslint --cache --ext .js,.ts ."
+    "lint": "eslint --cache --ext .js,.ts .",
+    "pretest": "run-s build:cjs",
+    "test": "mocha"
   }
 }
