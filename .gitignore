@@ -89,4 +89,11 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+### base62.js
 
+# GoogleChrome profile directory, execute from karma
+.chrome/
+
+# GitHub Pages
+# $ git worktree docs gh-pages
+docs/

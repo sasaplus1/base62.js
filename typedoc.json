@@ -1,0 +1,11 @@
+{
+  "disableOutputCheck": true,
+  "excludeExternals": true,
+  "excludeNotExported": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "mode": "modules",
+  "out": "docs",
+  "readme": "none",
+  "theme": "minimal"
+}
