@@ -48,15 +48,15 @@
     "build": "run-p -l build:*",
     "build-documents": "typedoc",
     "build:cjs": "tsc",
-    "build:esm": "rollup -c --environment data:esm",
-    "build:umd": "rollup -c --environment data:umd",
+    "build:esm": "rollup -c --environment build:esm",
+    "build:umd": "rollup -c --environment build:umd",
     "check-types": "tsc --noEmit",
     "fix": "eslint --cache --fix --ext .js,.ts .",
     "fixpack": "npx fixpack",
     "lint": "eslint --cache --ext .js,.ts .",
     "pretest": "run-s build:cjs",
     "test": "mocha",
-    "test:browser": "karma --single-run"
+    "test:browser": "karma start --single-run"
   },
   "sideEffects": false,
   "types": "index.d.ts"
