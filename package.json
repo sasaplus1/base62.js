@@ -17,6 +17,7 @@
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
     "mocha": "^6.2.0",
+    "npm-run-all": "^4.1.5",
     "power-assert": "^1.6.1",
     "prettier": "^1.18.2",
     "typescript": "^3.5.3"
@@ -37,7 +38,8 @@
     "fixpack": "npx fixpack",
     "lint": "eslint --cache --ext .js,.ts .",
     "pretest": "run-s build:cjs",
-    "test": "mocha"
+    "test": "mocha",
+    "test:browser": "karma --single-run"
   },
   "sideEffects": false,
   "types": "index.d.ts"
