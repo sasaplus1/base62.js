@@ -22,6 +22,8 @@
     "url": "https://github.com/sasaplus1/base62.js.git"
   },
   "scripts": {
-    "fixpack": "npx fixpack"
+    "fix": "eslint --cache --fix --ext .js,.ts .",
+    "fixpack": "npx fixpack",
+    "lint": "eslint --cache --ext .js,.ts ."
   }
 }
