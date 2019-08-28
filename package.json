@@ -12,9 +12,11 @@
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "espower-typescript": "^9.0.2",
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
     "mocha": "^6.2.0",
+    "power-assert": "^1.6.1",
     "prettier": "^1.18.2",
     "typescript": "^3.5.3"
   },
