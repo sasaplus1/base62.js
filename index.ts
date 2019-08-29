@@ -64,7 +64,7 @@ export function decode(str: string, baseTable = basicTable): number {
  */
 export function encode(num: number, baseTable = basicTable): string {
   if (!Number.isSafeInteger(num)) {
-    throw new TypeError(`num is must be an Integer: ${num}`);
+    throw new TypeError(`num is must be an integer: ${num}`);
   }
 
   if (baseTable.length !== 62) {
