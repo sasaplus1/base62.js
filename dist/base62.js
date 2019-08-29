@@ -62,7 +62,7 @@
    */
   function encode(num, baseTable = basicTable) {
       if (!Number.isSafeInteger(num)) {
-          throw new TypeError(`num is must be an Integer: ${num}`);
+          throw new TypeError(`num is must be an integer: ${num}`);
       }
       if (baseTable.length !== 62) {
           throw new Error('baseTable must be 62 in length');
