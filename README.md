@@ -35,6 +35,13 @@ const base62 = require('base62.js');
 <script src="base62.min.js"></script>
 ```
 
+if use in Internet Explorer, base62.js needs `Number.isSafeInteger` polyfill:
+
+```html
+<script src="https://polyfill.io/v3/polyfill.min.js?features=Number.isSafeInteger"></script>
+<script src="base62.min.js"></script>
+```
+
 ### Example
 
 ```js
