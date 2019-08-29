@@ -1,3 +1,8 @@
+# 1.0.0 / 2019-08-29
+
+  - modernize
+  - to TypeScript
+
 # 0.5.0 / 2014-10-08
 
   - refactored
