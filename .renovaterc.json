@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "config:base",
+    ":automergePatch",
+    ":label(renovate)",
+    ":preserveSemverRanges",
+    ":reviewer(sasaplus1)",
+    ":timezone(Asia/Tokyo)",
+    "group:definitelyTyped",
+    "group:jsUnitTest",
+    "group:linters",
+    "group:postcss"
+  ]
+}
