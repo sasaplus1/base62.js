@@ -1,7 +1,7 @@
 {
   "name": "base62.js",
   "description": "base62 encode/decode library",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "author": "sasa+1 <sasaplus1@gmail.com>",
   "browser": "dist/base62.js",
   "devDependencies": {
