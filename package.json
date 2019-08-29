@@ -31,6 +31,8 @@
     "typescript": "^3.5.3"
   },
   "files": [
+    "dist/*.js",
+    "dist/*.js.map",
     "index.d.ts",
     "index.js",
     "index.js.map",
