@@ -55,6 +55,7 @@
     "fixpack": "npx fixpack",
     "lint": "eslint --cache --ext .js,.ts .",
     "pretest": "run-s build:cjs",
+    "pretest:browser": "run-s build:umd",
     "test": "mocha",
     "test:browser": "karma start --single-run"
   },
