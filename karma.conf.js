@@ -23,6 +23,21 @@ module.exports = function(config) {
     },
     files: [
       {
+        pattern: require.resolve('./test/number-is-integer.js'),
+        type: 'js',
+        watched: false
+      },
+      {
+        pattern: require.resolve('./test/number-max-safe-integer.js'),
+        type: 'js',
+        watched: false
+      },
+      {
+        pattern: require.resolve('./test/number-is-safe-integer.js'),
+        type: 'js',
+        watched: false
+      },
+      {
         pattern: require.resolve('power-assert/build/power-assert.js'),
         type: 'js',
         watched: false
