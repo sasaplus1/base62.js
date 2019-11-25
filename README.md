@@ -1,6 +1,6 @@
 # base62.js
 
-[![test](https://github.com/sasaplus1/base62.js/workflows/test/badge.svg)](https://github.com/sasaplus1/base62.js)
+[![test](https://github.com/sasaplus1/base62.js/workflows/test/badge.svg)](https://github.com/sasaplus1/base62.js/actions?query=workflow%3Atest)
 [![npm version](https://badge.fury.io/js/base62.js.svg)](https://badge.fury.io/js/base62.js)
 [![Try base62.js on RunKit](https://badge.runkitcdn.com/base62.js.svg)](https://npm.runkit.com/base62.js)
 [![renovate](https://badges.renovateapi.com/github/sasaplus1/base62.js)](https://renovatebot.com)
