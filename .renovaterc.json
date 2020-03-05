@@ -1,10 +1,10 @@
 {
   "extends": [
     "config:base",
-    ":automergePatch",
+    ":automergeAll",
     ":label(renovate)",
     ":preserveSemverRanges",
-    ":reviewer(sasaplus1)",
+    ":assignee(sasaplus1)",
     ":timezone(Asia/Tokyo)",
     "group:definitelyTyped",
     "group:jsUnitTest",
