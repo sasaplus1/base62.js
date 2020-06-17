@@ -1,5 +1,5 @@
-dist/ linguist-generated=true
-index.d.ts linguist-generated=true
-index.js linguist-generated=true
+dist/* -linguist-detectable linguist-generated=true
+index.d.ts -linguist-detectable linguist-generated=true
+index.js -linguist-detectable linguist-generated=true
 index.js.map linguist-generated=true
-index.mjs linguist-generated=true
+index.mjs -linguist-detectable linguist-generated=true
