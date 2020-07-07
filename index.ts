@@ -9,7 +9,7 @@ const basicTable =
 function createIndexMap(table: string = basicTable): { [key: string]: number } {
   return table
     .split('')
-    .reduce(function(result: { [key: string]: number }, value, index) {
+    .reduce(function (result: { [key: string]: number }, value, index) {
       result[value] = index;
       return result;
     }, {});
@@ -47,7 +47,7 @@ export function decode(str: string, baseTable = basicTable): number {
   const numbers = (isNegative ? str.slice(1) : str).split('');
   const numbersLength = numbers.length;
 
-  const result = numbers.reduce(function(result, n, index) {
+  const result = numbers.reduce(function (result, n, index) {
     return result + indexMap[n] * Math.pow(62, numbersLength - index - 1);
   }, 0);
 
