@@ -6,7 +6,7 @@
  */
 Number.isInteger =
   Number.isInteger ||
-  function(value) {
+  function (value) {
     return (
       typeof value === 'number' &&
       isFinite(value) &&
